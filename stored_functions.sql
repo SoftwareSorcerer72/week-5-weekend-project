@@ -49,3 +49,23 @@ SELECT *
 FROM car;
 
 
+-- change customer phone number
+
+CREATE OR REPLACE FUNCTION update_customer_phone(
+    p_customer_id INT,
+    p_new_phone VARCHAR
+)
+RETURNS VOID AS $$
+BEGIN
+    UPDATE customer
+    SET phone = p_new_phone
+    WHERE customer_id = p_customer_id;
+END;
+$$ LANGUAGE plpgsql;
+
+
+
+SELECT update_customer_phone(
+    1,  
+    '555-6789'  
+);
